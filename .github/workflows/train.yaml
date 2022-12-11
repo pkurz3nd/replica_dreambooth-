@@ -8,6 +8,7 @@ on:
       model-name:
         required: true
         description: The name of the Replicate model to publish, in the format `your-replicate-username/desired-model-name`. If the model doesn't already exist, it will be created automatically.
+        default: pkurz3nd/house-with-pool
       prompt-identifier:
         required: true
         description: A short string representing your custom trained style or concept. This should be an uncommon string of letters like `zxz`, rather than a common word or name like `sarah` of `dog`. You'll use this string in prompts when running the model like "a pencil sketch of zxz sitting in a meadow".
@@ -60,8 +61,8 @@ jobs:
           -H "Content-Type: application/json" \
           -d '{
                   "input": {
-                      "instance_prompt": "a photo of a ${{ inputs.prompt-identifier }} person",
-                      "class_prompt": "a photo of a person",
+                      "instance_prompt": "a photo of a ${{ inputs.prompt-identifier }} house with pool",
+                      "class_prompt": "a photo of a house with pool",
                       "instance_data": "${{ steps.upload-training-data.outputs.INSTANCE_DATA_URL }}",
                       "max_train_steps": ${{ inputs.max-train-steps }}
                   },
